@@ -27,7 +27,6 @@ export class SandboxError extends LitElement {
           </div>
         </main>
       </div>
-
     `
   }
 }
