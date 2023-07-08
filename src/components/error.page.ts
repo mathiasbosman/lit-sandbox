@@ -2,24 +2,19 @@ import {html, LitElement} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 
 /**
- * The app wrapper
- *
  * @slot - This element has a slot
  */
-@customElement('vim-error')
-export class VimError extends LitElement {
+@customElement('sandbox-error')
+export class SandboxError extends LitElement {
 
   /**
    * The HTML error code
    */
-  @property({attribute: true, type: Number})
+  @property({type: Number})
   errorCode = 500
 
-  @property({attribute: true, type: String})
+  @property({type: String})
   errorText = "An error occurred"
-
-  @property({attribute: true, type: String})
-  subText = null
 
   render() {
     return html`
@@ -28,7 +23,7 @@ export class VimError extends LitElement {
           <div>
             <p>${this.errorCode}</p>
             <h1>${this.errorText}</h1>
-            ${this.subText? html`<p>${this.subText}</p>` : ``}
+            <slot></slot>
           </div>
         </main>
       </div>
@@ -39,6 +34,6 @@ export class VimError extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'vim-error': VimError
+    'sandbox-error': SandboxError
   }
 }

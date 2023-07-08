@@ -7,8 +7,8 @@ import "./components/error.page";
  *
  * @slot - This element has a slot
  */
-@customElement('vim-app')
-export class VimApp extends LitElement {
+@customElement('sandbox-app')
+export class SandboxApp extends LitElement {
 
   /**
    * The number of times the button has been clicked.
@@ -19,7 +19,7 @@ export class VimApp extends LitElement {
   render() {
     return html`
       <div>
-        <vim-error errorCode="404" errorText="Page not found" subText="Sorry, we could not find the page you are looking for."></vim-error>
+        <sandbox-error errorCode="404" errorText="Page not found" subText="Sorry, we could not find the page you are looking for."></sandbox-error>
         <slot></slot>
       </div>
 
@@ -29,6 +29,6 @@ export class VimApp extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'vim-app': VimApp
+    'sandbox-app': SandboxApp
   }
 }

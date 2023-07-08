@@ -6,12 +6,16 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "web-test-runner"
   },
   "dependencies": {
     "lit": "^2.7.2"
   },
   "devDependencies": {
+    "@open-wc/testing": "^3.2.0",
+    "@web/dev-server-esbuild": "^0.4.1",
+    "@web/test-runner": "^0.16.1",
     "typescript": "^5.1.6",
     "vite": "^4.3.9"
   }
