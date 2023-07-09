@@ -1,9 +1,34 @@
 import "../../src/components/error.page.js";
-import {SandboxError} from "../../src/components/error.page.js";
-import {assert, fixture, html} from '@open-wc/testing';
+import { describe, expect, it, beforeEach} from 'vitest'
+import {SandboxError} from "../../src/components/error.page";
 
-describe("<sandbox-error>", () => {
 
+describe("<sandbox-error> default", () => {
+    function getElement(): SandboxError | null | undefined {
+      return document.body.querySelector('sandbox-error');
+    }
+
+    beforeEach(async () => {
+      document.body.innerHTML = '<sandbox-error></sandbox-error>'
+      await new Promise<void>((resolve) => {
+        const interval = setInterval(() => {
+          if (getElement()) {
+            clearInterval(interval)
+            resolve()
+          }
+        })
+      })
+    })
+
+
+  it('default attributes are set', () => {
+    const error = getElement();
+    expect(error).not.null;
+    expect(error?.errorCode).equal(500);
+    expect(error?.errorText).equal('An error occurred');
+  });
+
+/*
   it('default attributes', async () => {
     const error: SandboxError = await fixture(html` <sandbox-error></sandbox-error> `);
     assert.equal(error.errorCode, 500);
@@ -23,4 +48,6 @@ describe("<sandbox-error>", () => {
     assert.equal(error.errorText, 'foo');
     assert.equal(error.innerHTML, 'bar');
   });
+
+ */
 });

@@ -19,7 +19,9 @@ export class SandboxApp extends LitElement {
   render() {
     return html`
       <div>
-        <sandbox-error errorCode="404" errorText="Page not found" subText="Sorry, we could not find the page you are looking for."></sandbox-error>
+        <sandbox-error errorCode="404" errorText="Page not found" subText="Sorry, we could not find the page you are looking for.">
+          <p class="mt-6 text-base leading-7 text-gray-600">Lorem Ipsum</p>
+        </sandbox-error>
         <slot></slot>
       </div>
 

@@ -1,12 +1,12 @@
-import {css, html} from 'lit'
+import {html} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
-import {SandboxElement} from "../sandbox.element";
+import {TailwindElement} from "../shared/tailwind.element";
 
 /**
  * @slot - This element has a slot
  */
 @customElement('sandbox-error')
-export class SandboxError extends SandboxElement {
+export class SandboxError extends TailwindElement('') {
 
   /**
    * The HTML error code
@@ -17,23 +17,19 @@ export class SandboxError extends SandboxElement {
   @property({type: String})
   errorText = "An error occurred";
 
-  static styles = [SandboxElement.styles, css`
-    main {
-      margin: 0 auto;
-    }
-  `];
-
   render() {
     return html`
-      <div>
-        <main>
-          <section>
-            <p>${this.errorCode}</p>
-            <h1>${this.errorText}</h1>
-            <slot></slot>
-          </section>
-        </main>
-      </div>
+      <section class="grid min-h-full place-items-center bg-white px-6 py-24
+sm:py-32 lg:px-8">
+        <div class="text-center">
+          <p class="text-base font-semibold text-emerald-600">${this.errorCode}</p>
+          <h1 class="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+            ${this.errorText}
+          </h1>
+          <slot></slot>
+          Some subtext
+        </div>
+      </section>
     `
   }
 }
