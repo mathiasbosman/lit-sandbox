@@ -1,0 +1,37 @@
+name: CI
+
+on: push
+
+jobs:
+  lint:
+    name: Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v3
+
+      - name: "Setup node"
+        uses: actions/setup-node@v3
+        with:
+          cache: 'npm'
+
+      - name: "Run lint"
+        run: npm run lint && npm run lint:test
+
+  test:
+    name: Testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v3
+
+      - name: "Setup node"
+        uses: actions/setup-node@v3
+        with:
+          cache: 'npm'
+
+      - name: "Install dependencies"
+        run: npm ci
+
+      - name: "Run unit tests"
+        run: npm run test
