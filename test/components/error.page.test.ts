@@ -1,32 +1,29 @@
-import "../../src/components/error.page.js";
-import { describe, expect, it, beforeEach} from 'vitest'
-import {SandboxError} from "../../src/components/error.page";
+import '../../src/components/error.page.js'
+import { describe, expect, it, beforeEach } from 'vitest'
+import { type SandboxError } from '../../src/components/error.page'
 
+describe('<sandbox-error> default', () => {
+  function getElement (): SandboxError | null | undefined {
+    return document.body.querySelector('sandbox-error')
+  }
 
-describe("<sandbox-error> default", () => {
-    function getElement(): SandboxError | null | undefined {
-      return document.body.querySelector('sandbox-error');
-    }
-
-    beforeEach(async () => {
-      document.body.innerHTML = '<sandbox-error></sandbox-error>'
-      await new Promise<void>((resolve) => {
-        const interval = setInterval(() => {
-          if (getElement()) {
-            clearInterval(interval)
-            resolve()
-          }
-        })
+  beforeEach(async () => {
+    document.body.innerHTML = '<sandbox-error></sandbox-error>'
+    await new Promise<void>((resolve) => {
+      const interval = setInterval(() => {
+        if (getElement() != null) {
+          clearInterval(interval)
+          resolve()
+        }
       })
     })
-
+  })
 
   it('default attributes are set', () => {
-    const error = getElement();
-    expect(error).not.null;
-    expect(error?.errorCode).equal(500);
-    expect(error?.errorText).equal('An error occurred');
-  });
+    const error = getElement()
+    expect(error?.errorCode).equal(500)
+    expect(error?.errorText).equal('An error occurred')
+  })
 
 /*
   it('default attributes', async () => {
@@ -50,4 +47,4 @@ describe("<sandbox-error> default", () => {
   });
 
  */
-});
+})

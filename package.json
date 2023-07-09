@@ -10,7 +10,10 @@
     "test": "vitest run",
     "test:watch": "vitest watch",
     "test:ui": "vitest --ui",
-    "lint": "eslint src/**/*.ts"
+    "lint": "eslint src/**/*.ts",
+    "lint:test": "eslint test/**/*.ts",
+    "lint:test:fix": "eslint test/**/*.ts --fix",
+    "lint:fix": "eslint src/**/*.ts --fix"
   },
   "dependencies": {
     "lit": "^2.7.2"

@@ -1,23 +1,22 @@
-import {html} from 'lit'
-import {customElement, property} from 'lit/decorators.js'
-import {TailwindElement} from "../shared/tailwind.element";
+import { html, type TemplateResult } from 'lit'
+import { customElement, property } from 'lit/decorators.js'
+import { TailwindElement } from '../shared/tailwind.element'
 
 /**
  * @slot - This element has a slot
  */
 @customElement('sandbox-error')
-export class SandboxError extends TailwindElement('') {
-
+export class SandboxError extends TailwindElement {
   /**
    * The HTML error code
    */
-  @property({type: Number})
-  errorCode = 500;
+  @property({ type: Number })
+    errorCode = 500
 
-  @property({type: String})
-  errorText = "An error occurred";
+  @property({ type: String })
+    errorText = 'An error occurred'
 
-  render() {
+  override render (): TemplateResult {
     return html`
       <section class="grid min-h-full place-items-center bg-white px-6 py-24
 sm:py-32 lg:px-8">
