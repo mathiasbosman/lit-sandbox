@@ -1,24 +1,27 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "node",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
+    "importsNotUsedAsValues": "preserve",
 
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
-  },
-  "include": ["**/*.ts"]
+    "noFallthroughCasesInSwitch": true,
+
+    "plugins": [
+      {
+        "name": "ts-lit-plugin",
+        "strict": true,
+        "rules": {
+          "no-missing-element-type-definition": "warn" // Each element MUST be defined as HTMLElementTagNameMap
+        }
+      },
+      {
+        "name": "typescript-lit-html-plugin",
+        "strict": true
+      }
+    ]
+  }
 }

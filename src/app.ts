@@ -1,6 +1,9 @@
-import {html, LitElement} from 'lit'
-import {customElement, property} from 'lit/decorators.js'
-import "./components/error.page";
+import { html, LitElement, type TemplateResult } from 'lit'
+import { customElement } from 'lit/decorators.js'
+import './components/error.page'
+import './components/datalist'
+import './components/counterbutton'
+import './components/autocomplete'
 
 /**
  * The app wrapper
@@ -9,20 +12,18 @@ import "./components/error.page";
  */
 @customElement('sandbox-app')
 export class SandboxApp extends LitElement {
-
-  /**
-   * The number of times the button has been clicked.
-   */
-  @property({type: Number})
-  count = 0
-
-  render() {
+  override render (): TemplateResult {
     return html`
       <div>
         <sandbox-error errorCode="404" errorText="Page not found" subText="Sorry, we could not find the page you are looking for.">
-          <p class="mt-6 text-base leading-7 text-gray-600">Lorem Ipsum</p>
+          <p>Lorem Ipsum</p>
         </sandbox-error>
         <slot></slot>
+
+        <sandbox-data-list name="UUID list" .data="${['an', 'array', 'of', 'uuids']}"></sandbox-data-list>
+        <sandbox-counter-button></sandbox-counter-button>
+        <sandbox-counter-button counter=5></sandbox-counter-button>
+        <sandbox-autocomplete></sandbox-autocomplete>
       </div>
 
     `

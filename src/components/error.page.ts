@@ -26,7 +26,6 @@ sm:py-32 lg:px-8">
             ${this.errorText}
           </h1>
           <slot></slot>
-          Some subtext
         </div>
       </section>
     `
