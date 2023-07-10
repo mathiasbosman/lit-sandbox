@@ -1,5 +1,5 @@
 export const mount = async (html: string, selector: keyof HTMLElementTagNameMap): Promise<HTMLElement | null> => {
-  document.body.innerHTML = html
+  document.body.innerHTML = html // not entirely sure why this even works but hey...
   return element(selector)
 }
 
