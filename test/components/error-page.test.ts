@@ -1,4 +1,4 @@
-import '../../src/components/error.page'
+import '../../src/components/error-page'
 import { describe, expect, it } from 'vitest'
 import { mount, shadow } from '../test-utils'
 
