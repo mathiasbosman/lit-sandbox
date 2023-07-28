@@ -1,23 +1,24 @@
 import '../../src/components/counterbutton.js'
 import { describe, expect, it, vi } from 'vitest'
-import { htmlElement, mount, shadow } from '../test-utils'
+import { shadow } from '../test-utils'
+import { fixture } from '@open-wc/testing-helpers'
 
 describe('<sandbox-counter-button>', () => {
   it('dom should contain default values', async () => {
-    const innerHtml = shadow(await mount('<sandbox-counter-button></sandbox-counter-button>', 'sandbox-counter-button'))?.innerHTML
-    expect(innerHtml).toContain('0')
+    const shadowRoot = await shadow('<sandbox-counter-button></sandbox-counter-button>')
+    expect(shadowRoot?.innerHTML).toContain('0')
   })
 
   it('dom should contain initial value', async () => {
-    const innerHtml = shadow(await mount('<sandbox-counter-button counter="999"></sandbox-counter-button>', 'sandbox-counter-button'))?.innerHTML
-    expect(innerHtml).toContain('999')
+    const shadowRoot = await shadow('<sandbox-counter-button counter="999"></sandbox-counter-button>')
+    expect(shadowRoot?.innerHTML).toContain('999')
   })
 
   it('clicking changes state', async () => {
     const spyClick = vi.fn()
-    const el = await mount('<sandbox-counter-button></sandbox-counter-button>', 'sandbox-counter-button')
+    const el = await fixture('<sandbox-counter-button></sandbox-counter-button>')
     el?.addEventListener('toggleState', spyClick)
-    htmlElement(el, 'button')?.click()
+    el.shadowRoot?.querySelector('button')?.click()
     expect(spyClick).toHaveBeenCalledOnce()
   })
 })
