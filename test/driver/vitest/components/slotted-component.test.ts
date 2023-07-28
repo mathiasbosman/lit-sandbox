@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { shadow } from '../test-utils.ts'
-import '../../src/components/slotted-component' // important brah!
+import '../../../../src/components/slotted-component' // important brah!
 
 describe('<sandbox-slotted-component>', () => {
   it('should render a grid with 3 columns', async () => {

@@ -1,4 +1,4 @@
-import '../../src/components/counterbutton.js'
+import '../../../../src/components/counterbutton'
 import { describe, expect, it, vi } from 'vitest'
 import { shadow } from '../test-utils'
 import { fixture } from '@open-wc/testing-helpers'

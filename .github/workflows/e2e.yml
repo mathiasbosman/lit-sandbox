@@ -1,0 +1,69 @@
+name: End2End
+
+on:
+  push:
+  schedule:
+    - cron: "43 9 * * 3"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  e2e-browsers:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [ "firefox", "chrome" ]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: E2E - ${{ matrix.browser }}
+        uses: cypress-io/github-action@v5
+        with:
+          project: "./test/driver/cypress"
+          browser: ${{ matrix.browser }}
+          start: npm run local
+          wait-on: "http://localhost:5173"
+          wait-on-timeout: 15
+          config: "viewportWidth=1920,viewportHeight=1080"
+      - uses: actions/upload-artifact@v3
+        name: Upload screenshots
+        with:
+          name: cypress-${{matrix.browser}}-screenshots
+          path: ./test/driver/cypress/screenshots/
+  e2e-viewports:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [ "electron" ]
+        viewport: [
+          #desktop
+          { width: 1920, height: 1080 },
+          { width: 1280, height: 720 },
+          #mobile
+          { width: 360, height: 640 },
+          { width: 414, height: 896 },
+          #tablet
+          { width: 601, height: 962 },
+          { width: 1280, height: 800 },
+        ]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: E2E - ${{ matrix.browser }} ${{ matrix.viewport.width }}x${{ matrix.viewport.height }}
+        uses: cypress-io/github-action@v5
+        with:
+          project: "./test/driver/cypress"
+          browser: ${{ matrix.browser }}
+          start: npm run local
+          wait-on: "http://localhost:5173"
+          wait-on-timeout: 15
+          config: "viewportWidth=${{ matrix.viewport.width }},viewportHeight=${{ matrix.viewport.height }}"
+      - uses: actions/upload-artifact@v3
+        name: Upload screenshots
+        with:
+          name: cypress-${{matrix.browser}}-${{matrix.viewport.width}}x${{matrix.viewport.height}}-screenshots
+          path: ./test/driver/cypress/screenshots/
